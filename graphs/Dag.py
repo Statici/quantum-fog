@@ -12,8 +12,6 @@ from MyExceptions import BadGraphStructure
 class Dag(Graph):
     """
     A Dag is a Graph. DAG = Directed Acyclic Graph. A mere Graph is
-    undirected and is composed of Node's. A Dag is directed and is composed
-    of DirectedNode's.
 
     Attributes
     ----------
