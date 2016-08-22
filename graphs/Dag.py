@@ -58,10 +58,11 @@ class Dag(Graph):
 
     def topological_sort(self):
         """
-        Orders nodes (permutes their indices) such that no node is before
-        any of its parents. Node with lowest topo_index number is a root node.
-        Exception is raised if graph has cycles and cannot be ordered
-        topologically.
+        Orders nodes (permutes their topo_index's) such that no node is before
+        any of its parents. Node with lowest topo_index number is a root
+        node. So this could also be called a chronological sort, youngest
+        nodes first. Exception is raised if graph has cycles and cannot be
+        ordered topologically.
 
         Returns
         -------
@@ -155,6 +156,7 @@ class Dag(Graph):
         node_list = list(self.nodes)
         nx_graph = nx.DiGraph()
         for nd in node_list:
+            nx_graph.add_node(nd.name)
             for ch in nd.children:
                 nx_graph.add_edge(nd.name, ch.name)
         return nx_graph
@@ -179,8 +181,8 @@ if __name__ == "__main__":
     g.draw(algo_num=1)
 
     # double dot to get parent directory
-    path1 = '..\\examples_cbnets\\dot_test1.dot'
-    path2 = '..\\examples_cbnets\\dot_test2.dot'
+    path1 = '../examples_cbnets/dot_test1.dot'
+    path2 = '../examples_cbnets/dot_test2.dot'
     g.write_dot(path1)
     new_g = Dag.read_dot(path1)
     new_g.write_dot(path2)
